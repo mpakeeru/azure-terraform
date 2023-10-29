@@ -1,0 +1,10 @@
+.terraform*
+azure-data-platform/.terraform*
+azure-data-platform/terraform.tf*
+terraform.tfstate.backup
+service-principle/.terraform*
+service-principle/terraform.tf*
+tfstate-backend/.terraform*
+tfstate-backend/terraform.tf*
+ssh-keys/.terraform*
+ssh-keys/terraform.tf*
