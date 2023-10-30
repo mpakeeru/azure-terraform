@@ -8,3 +8,5 @@ tfstate-backend/.terraform*
 tfstate-backend/terraform.tf*
 ssh-keys/.terraform*
 ssh-keys/terraform.tf*
+secure-synapse/.terraform*
+secure-synapse/terraform.tf*
