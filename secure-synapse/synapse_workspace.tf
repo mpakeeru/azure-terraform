@@ -133,3 +133,11 @@ resource "azurerm_private_endpoint" "pe_sqlondemand" {
     private_dns_zone_ids = [azurerm_private_dns_zone.zone_sql.id]
   }
 }
+/*
+# Grant Workspace Admin to portal user/admin
+resource "azurerm_synapse_role_assignment" "portal" {
+  synapse_workspace_id = azurerm_synapse_workspace.default.id
+  role_name            = "Synapse SQL Administrator"
+  principal_id         = var.portal_user
+}
+*/

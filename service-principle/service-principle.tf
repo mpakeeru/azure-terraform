@@ -46,10 +46,11 @@ resource "azuread_application" "sp_data_lake" {
 }
 # Create Service Principle
 resource "azuread_service_principal" "sp_data_lake" {
-  application_id    = azuread_application.sp_data_lake.application_id
+  client_id = azuread_application.sp_data_lake.client_id
   owners            = [data.azuread_client_config.current.object_id]
   alternative_names = var.alternative_names
   description       = var.description
+  app_role_assignment_required = false
 }
 
 # create password for service principle

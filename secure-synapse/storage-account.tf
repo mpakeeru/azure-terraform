@@ -9,6 +9,14 @@ resource "azurerm_storage_account" "datalake" {
   is_hns_enabled           = true
 }
 
+# Create a storage container within storage account
+
+resource "azurerm_storage_container" "container" {
+  for_each              = toset( ["landing","bronze", "silver", "gold"] )
+  name                  = each.key
+  storage_account_name  = azurerm_storage_account.datalake.name
+ 
+}
 #Assign Role assignments
 
 resource "azurerm_role_assignment" "sbdc_current_user" {
@@ -22,12 +30,12 @@ resource "azurerm_role_assignment" "sbdc_admin_user" {
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = "6bb54f24-94fa-478f-a2f8-80a52224a736"
 }
-/*resource "azurerm_role_assignment" "sbdc_datalake_service_principal" {
+resource "azurerm_role_assignment" "sbdc_datalake_service_principal" {
   scope                = azurerm_storage_account.datalake.id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = data.azuread_service_principal.sp-data-lake.object_id
 }
-*/
+
 resource "azurerm_role_assignment" "sbdc_syn_ws" {
   scope                = azurerm_storage_account.datalake.id
   role_definition_name = "Storage Blob Data Contributor"
@@ -59,6 +67,10 @@ resource "azurerm_storage_account_network_rules" "firewall_rules" {
   ip_rules                   = [data.http.ip.response_body]
   virtual_network_subnet_ids = []
   bypass                     = ["None"]
+  private_link_access {
+    endpoint_resource_id = azurerm_data_factory_managed_private_endpoint.adf_manage_endpoint_blob.id
+    endpoint_tenant_id = data.azurerm_client_config.current.tenant_id
+  }
 }
 
 # DNS Zones

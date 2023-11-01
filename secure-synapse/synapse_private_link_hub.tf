@@ -8,7 +8,7 @@ resource "azurerm_synapse_private_link_hub" "default" {
 
 resource "azurerm_private_dns_zone" "zone_web" {
   name                = "privatelink.azuresynapse.net"
-  resource_group_name = azurerm_resource_group.default.name
+  resource_group_name = data.azurerm_resource_group.data-lake-rg.name
 }
 
 # Private Endpoint configuration

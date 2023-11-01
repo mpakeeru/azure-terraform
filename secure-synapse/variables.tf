@@ -65,3 +65,8 @@ variable "enable_syn_sqlpool" {
   default     = false
 }
 
+variable "portal_user" {
+    description = "Object id for portl user"
+    default = "6bb54f24-94fa-478f-a2f8-80a52224a736"
+  
+}
