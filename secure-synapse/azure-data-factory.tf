@@ -90,7 +90,7 @@ resource "azurerm_data_factory_linked_service_key_vault" "adf_kv_ls" {
 resource "azurerm_data_factory_linked_service_azure_blob_storage" "adf_adsl_ls" {
   name            = "adf_ads_ls"
   data_factory_id = azurerm_data_factory.adf_transform.id
-
+  integration_runtime_name = azurerm_data_factory_integration_runtime_azure.adf_runtime_vnetwork.name
   service_endpoint     = "https://${azurerm_storage_account.datalake.name}.blob.core.windows.net"
   service_principal_id = data.azuread_service_principal.sp-data-lake.client_id
   tenant_id            = data.azurerm_client_config.current.tenant_id

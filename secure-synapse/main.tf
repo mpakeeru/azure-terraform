@@ -1,6 +1,15 @@
 locals {
   basename      = "${var.name}-${var.environment}"
   safe_basename = replace(local.basename, "-", "")
+  
+  prefix = "adb-pl"
+    tags = {
+    Environment = "Demo"
+    Owner       = lookup(data.external.me.result, "name")
+  }
+}
+data "external" "me" {
+  program = ["az", "account", "show", "--query", "user"]
 }
 
 data "azurerm_client_config" "current" {}

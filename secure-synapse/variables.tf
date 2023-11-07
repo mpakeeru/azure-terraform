@@ -70,3 +70,13 @@ variable "portal_user" {
     default = "6bb54f24-94fa-478f-a2f8-80a52224a736"
   
 }
+
+variable "cidr" {
+  type = string
+  default = "172.0.0.0/16"
+}
+
+variable "workspace_prefix" {
+  type = string
+  default = "adbworkspace"
+}
