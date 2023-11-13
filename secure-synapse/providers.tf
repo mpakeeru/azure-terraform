@@ -40,3 +40,11 @@ terraform {
     key                  = "tfstate-secure-synapse/terraform.tfstate"
   }
 }
+
+provider "databricks" {
+  azure_workspace_resource_id = azurerm_databricks_workspace.dbws.id
+  host  = azurerm_databricks_workspace.dbws.workspace_url
+  azure_client_id             = data.azuread_service_principal.sp-data-lake.client_id
+  azure_client_secret         = data.azurerm_key_vault_secret.kvsecret.value
+  azure_tenant_id             = data.azurerm_client_config.current.tenant_id
+}

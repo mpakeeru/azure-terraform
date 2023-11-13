@@ -8,6 +8,15 @@ terraform {
   }
 }
 
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "tfstate"
+    storage_account_name = "tfstatevenkat"
+    container_name       = "tfstate"
+    key                  = "tfstate-backend/network/terraform.tfstate"
+  }
+}
+
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}

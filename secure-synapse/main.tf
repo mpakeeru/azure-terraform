@@ -5,13 +5,14 @@ locals {
   prefix = "adb-pl"
     tags = {
     Environment = "Demo"
-    Owner       = lookup(data.external.me.result, "name")
+   # Owner       = lookup(data.external.me.result, "name")
   }
 }
+/*
 data "external" "me" {
   program = ["az", "account", "show", "--query", "user"]
 }
-
+*/
 data "azurerm_client_config" "current" {}
 
 data "http" "ip" {
@@ -52,3 +53,8 @@ data "azurerm_subnet" "dbsubnet" {
     resource_group_name = "${local.basename}-rg" 
   
 }
+
+/*data "databricks_service_principal" "dbservice" {
+  application_id = data.azuread_service_principal.sp-data-lake.application_id
+}
+*/

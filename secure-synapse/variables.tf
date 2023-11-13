@@ -38,11 +38,20 @@ variable "jumphost_username" {
   default = "adminuser"
 }
 
+variable "dbhost_username" {
+  type        = string
+  description = "Admin username of the VM"
+  default = "adminuser"
+}
 variable "jumphost_password" {
   type        = string
   description = "Password for the admin username of the VM"
 }
 
+variable "dbhost_password" {
+  type        = string
+  description = "Password for the admin username of the VM"
+}
 variable "synadmin_username" {
   type        = string
   description = "Specifies The login name of the SQL administrator"
