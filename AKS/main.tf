@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "=3.0.0"
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = ">= 2.30.0"
+    }
   }
 }
 
@@ -39,3 +43,18 @@ resource "azurerm_resource_group" "rg-aks" {
   name     = "${local.resource_name_prefix}-${var.resource_group_name}"
   location = var.resource_group_location
 }
+
+data "azurerm_virtual_network" "vnet" {
+    name = "${local.owners}-${local.environment}-vnet"
+    resource_group_name = "${local.owners}-${local.environment}-rg" 
+}
+
+data "azurerm_key_vault" "myKeyVault" {
+  resource_group_name= "data-lake-rg"
+  name = "myKeyVaultVenkat"
+}
+
+data "http" "ip" {
+  url = "https://ifconfig.me"
+}
+data "azurerm_client_config" "current" {}
